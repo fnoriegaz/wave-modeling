@@ -1,6 +1,8 @@
 #include<iostream>
 #include<cstring>
-#include"WaveModeling.hpp"
+
+
+#include"../headers/WaveModeling.hpp"
 
 
 WaveModeling::WaveModeling(int cols, int rows, float deltaX, float deltaZ,
@@ -17,7 +19,7 @@ WaveModeling::WaveModeling(int cols, int rows, float deltaX, float deltaZ,
 
     for(int i=0;i<(_cols);i++){
       for(int j=0;j<(_rows);j++){
-        velocity[j+i*_rows]=2500.0;
+        velocity[j+i*_rows]=5000.0;
       }
     }
 
@@ -25,12 +27,14 @@ WaveModeling::WaveModeling(int cols, int rows, float deltaX, float deltaZ,
   }
 
 
-void WaveModeling::stepForward(Fields frwdFields){
+void WaveModeling::stepForward(Fields frwdFields, std::vector<float> wavelet,
+int sx, int sz){
 
   int idx;
   for(int it=0;it<_tSamples;it++){
     frwdFields.laplacian();
     frwdFields.timeDVTV(velocity);
+    frwdFields.addSource(wavelet,sx,sz,it);
 
     for(int i=0;i<(_cols);i++){
       for(int j=0;j<(_rows);j++){

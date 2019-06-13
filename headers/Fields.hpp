@@ -1,6 +1,8 @@
 #ifndef FIELDS_H
 #define FIELDS_H
 
+#include<vector>
+
 class Fields{
 
 public:
@@ -13,6 +15,7 @@ public:
   Fields(int cols, int rows, float deltaX, float deltaZ, float deltaT);
   void laplacian();
   void timeDVTV(float *velocity);
+  void addSource(std::vector<float> wavelet, int sx, int sz, int it);
 
 };
 

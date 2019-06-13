@@ -1,5 +1,5 @@
 #include<iostream>
-#include"Fields.hpp"
+#include"../headers/Fields.hpp"
 
 Fields::Fields(int cols, int rows, float deltaX, float deltaZ, float deltaT){
 
@@ -21,8 +21,6 @@ Fields::Fields(int cols, int rows, float deltaX, float deltaZ, float deltaT){
       P1[j+i*_rows]=0.0;
     }
   }
-
-  P[_rows/2+_cols*_rows/2]=10.0;
 
 }
 
@@ -52,5 +50,11 @@ void Fields::timeDVTV(float *velocity){
       d2Pdt2[idx] = velocity[idx]*velocity[idx]*(d2PdX2[idx] + d2PdZ2[idx]);
     }
   }
+
+}
+
+void Fields::addSource(std::vector<float> wavelet, int sx, int sz, int it){
+
+  P[sz + sx*_rows] += wavelet[it];
 
 }

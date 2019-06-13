@@ -13,7 +13,8 @@ public:
 
   WaveModeling(int cols, int rows, float deltaX, float deltaZ, float deltaT,
               int tSamples);
-  void stepForward(Fields frwdFields);
+  void stepForward(Fields frwdFields, std::vector<float> wavelet,
+                  int sx, int sz);
 
 
 };
